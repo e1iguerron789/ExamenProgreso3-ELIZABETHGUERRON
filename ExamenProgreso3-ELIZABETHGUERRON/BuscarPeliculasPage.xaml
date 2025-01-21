@@ -2,12 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExamenProgreso3_ELIZABETHGUERRON.BuscarPeliculasPage"
-             Title="BuscarPeliculasPage">
-    <VerticalStackLayout>
-        <VerticalStackLayout>
-            <Entry x:Name="eguerron_txtSearch" Placeholder="Buscar película" />
-            <Button x:Name="eguerron_btnBuscar" Text="Buscar" />
-            <Button x:Name="eguerron_btnLimpiar" Text="Limpiar" />
-            <Label x:Name="eguerron_lblResultado" Text="Resultado de búsqueda" />
-        </VerticalStackLayout>
+             Title="Buscar Película">
+    <StackLayout Padding="20" Spacing="15">
+    
+        <Label Text="Buscar Película" FontSize="24" HorizontalOptions="Center" />
+
+       
+        <Entry x:Name="criterioBusquedaEntry" Placeholder="Ingrese el título de la película" />
+
+        
+        <Button Text="Buscar Película" Clicked="OnBuscarClicked" />
+
+        <Label x:Name="resultadoLabel" FontSize="18" TextColor="Black" HorizontalOptions="Center" 
+               VerticalOptions="Center" Text="Resultado aparecerá aquí..." />
+
+    </StackLayout>
 </ContentPage>
