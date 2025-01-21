@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExamenProgreso3_ELIZABETHGUERRON.BuscarPeliculasPage"
+             Title="BuscarPeliculasPage">
+    <VerticalStackLayout>
+        <VerticalStackLayout>
+            <Entry x:Name="eguerron_txtSearch" Placeholder="Buscar película" />
+            <Button x:Name="eguerron_btnBuscar" Text="Buscar" />
+            <Button x:Name="eguerron_btnLimpiar" Text="Limpiar" />
+            <Label x:Name="eguerron_lblResultado" Text="Resultado de búsqueda" />
+        </VerticalStackLayout>
+</ContentPage>
