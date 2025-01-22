@@ -11,7 +11,7 @@
         <Entry x:Name="criterioBusquedaEntry" Placeholder="Ingrese el título de la película" />
 
         
-        <Button Text="Buscar Película" Clicked="OnBuscarClicked" />
+        <Button Text="Buscar Película" Clicked="OnBuscarPeliculaClicked" />
 
         <Label x:Name="resultadoLabel" FontSize="18" TextColor="Black" HorizontalOptions="Center" 
                VerticalOptions="Center" Text="Resultado aparecerá aquí..." />

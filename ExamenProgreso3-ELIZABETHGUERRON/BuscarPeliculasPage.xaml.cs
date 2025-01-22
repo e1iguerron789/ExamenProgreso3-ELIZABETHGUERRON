@@ -16,52 +16,64 @@ namespace ExamenProgreso3_ELIZABETHGUERRON
             _httpClient = new HttpClient();
         }
 
-        private async void OnBuscarClicked(object sender, EventArgs e)
+        private async void OnBuscarPeliculaClicked(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("Botón presionado");
             try
             {
-                if (string.IsNullOrWhiteSpace(criterioBusquedaEntry.Text))
+                string titulo = criterioBusquedaEntry.Text;
+                if (string.IsNullOrWhiteSpace(titulo))
                 {
-                    await DisplayAlert("Error", "Por favor, ingrese el título de la película.", "OK");
+                    await DisplayAlert("Error", "Por favor ingrese un título para buscar.", "OK");
                     return;
                 }
 
-                string titulo = criterioBusquedaEntry.Text;
-                var pelicula = await BuscarPeliculaAsync(titulo);
-
-                if (pelicula != null)
+                // Llama a la API
+                Pelicula resultado = await BuscarPeliculaAsync(titulo);
+                if (resultado != null)
                 {
-                    resultadoLabel.Text = $"Título: {pelicula.Titulo}\n" +
-                                          $"Género: {pelicula.Genero}\n" +
-                                          $"Actor Principal: {pelicula.ActorPrincipal}\n" +
-                                          $"Premios: {pelicula.Premios}\n" +
-                                          $"Sitio Web: {pelicula.SitioWeb}";
+                    resultadoLabel.Text = $"Título: {resultado.Titulo}\nGénero: {resultado.Genero}\nActor Principal: {resultado.ActorPrincipal}\nPremios: {resultado.Premios}\nSitio Web: {resultado.SitioWeb}";
                 }
                 else
                 {
-                    resultadoLabel.Text = "No se encontró ninguna película con ese título.";
+                    resultadoLabel.Text = "No se encontró ninguna película.";
                 }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
+                System.Diagnostics.Debug.WriteLine($"Error: {ex}");
             }
+
+
+
         }
 
         private async Task<Pelicula> BuscarPeliculaAsync(string titulo)
         {
-            string url = $"https://api.ejemplo.com/peliculas?titulo={Uri.EscapeDataString(titulo)}";
+            string url = $"https://freetestapi.com/api/v1/movies?search={Uri.EscapeDataString(titulo)}";
             var response = await _httpClient.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<Pelicula>(json);
+                System.Diagnostics.Debug.WriteLine($"Respuesta JSON: {json}");
+                try
+                {
+                    return JsonSerializer.Deserialize<Pelicula>(json);
+                }
+                catch (JsonException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error de deserialización: {ex.Message}");
+                }
+            }
+            else
+            {
+                string errorContent = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"Error: {response.StatusCode}, Contenido: {errorContent}");
             }
 
             return null;
         }
     }
-
-   
 }

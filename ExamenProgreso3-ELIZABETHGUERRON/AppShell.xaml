@@ -12,9 +12,7 @@
             Title="Buscar Película"
             ContentTemplate="{DataTemplate local:BuscarPeliculasPage}" />
         
-        <ShellContent
-            Title="Películas Consultadas"
-            ContentTemplate="{DataTemplate local:PeliculasConsultadasPage}" />
+        
     </TabBar>
 
 </Shell>
